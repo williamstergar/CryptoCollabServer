@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
             // username,
             email: email,
             password: bcrypt.hashSync(password, 13),
-            admin: true
+            admin: false
         });
         let token = jwt.sign({ id: User.id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 });
         res.status(201).json({
