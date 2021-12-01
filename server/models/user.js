@@ -22,6 +22,16 @@ const User = db.define("user", {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    // id: {
+    //     type: DataTypes.UUID,
+    //     primaryKey: true,
+    //     defaultValue: DataTypes.UUIDV4,
+    //     allowNull: false,
+    // }
 })
 
 module.exports = User

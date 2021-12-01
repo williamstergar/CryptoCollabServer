@@ -9,14 +9,19 @@ app.use(Express.json())
 app.use("/user", controllers.userController)
 app.use("/collab", controllers.collabController)
 app.use("/crypto", controllers.cryptoController)
+app.use("/comment", controllers.commentController)
 
-dbConnection.authenticate()
-    .then(() => dbConnection.sync())
+try {
+dbConnection
+    .authenticate()
+    .then( async () => await dbConnection.sync())
+    // .then(() => dbConnection.sync())
     .then(() => {
         app.listen(process.env.PORT, () => {
             console.log(`[Server]: App is listening on ${process.env.PORT}`);
         });
     })
-    .catch((err) => {
-        console.log(`[Server]: Server crashed. Error =${err}`);
-    })
+} catch (err) {
+    console.log("[SERVER]: Server crashed")
+    console.log(err)
+}
