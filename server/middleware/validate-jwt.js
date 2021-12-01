@@ -5,7 +5,7 @@ const validateSession = async (req, res, next) => { // here we are declaring a v
         return next();
     } else if (req.headers.authorization) { // For lines 6-23, this is where the token is created in order for a user to use specific functions and access private user data. There is a token for a registered user, but there is a different one after a user logs in. This second token creation allows the user to move through the website as they'd like to. Below is a ternary and basically means "If a user is found, a sessionToken is created and the user can navigate the website and access private user data. If a user is not found, they will not be authorized to access private user data."
         const { authorization } = req.headers;
-        const payload = authorization ? jwt.verify(token, process.env.JWT_SECRET) : undefined;
+        const payload = authorization ? jwt.verify(authorization, process.env.JWT_SECRET) : undefined;
         if (payload) {
             let foundUser = await models.UserModel.findOne({
                 where: { id: payload.id }
